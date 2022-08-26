@@ -1,3 +1,5 @@
+import { connection } from "./connection.js";
+
 export const getData = (req, res) => {
   let sqlQuery = "SELECT * FROM houses";
 
@@ -9,18 +11,18 @@ export const getData = (req, res) => {
 
 export const getHouse = (req, res) => {
   let sqlQuery = "SELECT * FROM houses WHERE id = ?";
-  let query = connection.query(sqlQuery, [req.params.id], (err, result) => {
+  let query = connection.query(sqlQuery, [req.params.id], (err, results) => {
     if (err) throw err;
-    res.send(result);
+    res.send(results);
   });
 };
 
 export const addHouse = (req, res) => {
   let data = { name: req.body.name, price: req.body.price };
   let sqlQuery = "INSERT INTO houses SET ?";
-  let query = connection.query(sqlQuery, data, (err, result) => {
+  let query = connection.query(sqlQuery, data, (err, results) => {
     if (err) throw err;
-    res.send(result);
+    res.send(results);
   });
 };
 
@@ -32,16 +34,25 @@ export const updateHouse = (req, res) => {
     req.body.price +
     "' WHERE id=" +
     req.params.id;
-  let query = connection.query(sqlQuery, (err, result) => {
+  let query = connection.query(sqlQuery, (err, results) => {
     if (err) throw err;
-    res.send(result);
+    res.send(results);
   });
 };
 
 export const deleteHouse = (req, res) => {
   let sqlQuery = "DELETE FROM houses WHERE id=" + req.params.id + "";
-  let query = connection.query(sqlQuery, (err, result) => {
+  let query = connection.query(sqlQuery, (err, results) => {
     if (err) throw err;
-    res.send(result);
+    res.send(results);
   });
 };
+
+/**
+ * API Response
+ *
+ * @return response()
+ */
+// function apiResponse(results) {
+//   return JSON.stringify({ status: 200, error: null, response: results });
+// }
