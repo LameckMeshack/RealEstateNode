@@ -2,6 +2,8 @@
 import express from "express";
 import mysql from "mysql";
 import bodyParser from "body-parser";
+import { houseRouter } from "./routes.js";
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -25,14 +27,7 @@ connection.connect((err) => {
   console.log("Connection established");
 });
 
-app.get("/", (req, res) => {
-  let sqlQuery = "SELECT * FROM houses";
-
-  let query = connection.query(sqlQuery, (err, results) => {
-    if (err) throw err;
-    res.send(results);
-  });
-});
+app.get("/houses", houseRouter);
 
 app.listen(port, hostname, () => {
   console.log(`Your Server is running at http://${hostname}:${port}/`);
