@@ -24,15 +24,6 @@ connection.connect((err) => {
 });
 
 app.use("/houses", houseRouter);
-// app.get("/housestry",( req, res)) => {
-//   let sqlQuery = "SELECT * FROM try";
-
-//   let query = connection.query(sqlQuery, (err, results) => {
-//     if (err) throw err;
-//     console.log(results);
-//     res.send(results);
-//   });
-// };
 
 app.listen(port, hostname, () => {
   console.log(`Your Server is running at http://${hostname}:${port}/`);

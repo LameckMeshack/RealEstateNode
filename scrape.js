@@ -31,18 +31,25 @@ const scrape = async () => {
     }),
       //   console.log(JSON.stringify(houses));
       console.log(houses);
-    // connection.query(
-    //   "INSERT INTO try (title) VALUES ?",
-    //   [houses.map((item) => [item.title])],
-    //   function (err, result) {
-    //     if (err) throw err;
-    //     console.log("Number of records inserted: " + result.affectedRows);
-    //   }
-    // );
-    // //ending the connection
-    // connection.end();
+    connection.query(
+      "INSERT INTO houses (title,image,location,price) VALUES ?",
+      [
+        houses.map((item) => [
+          item.title,
+          item.image,
+          item.location,
+          item.price,
+        ]),
+      ],
+      function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+      }
+    );
+    //ending the connection
+    connection.end();
 
-    ///////
+    /////
   } catch (error) {
     console.log(error);
   }
