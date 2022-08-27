@@ -1,10 +1,11 @@
 import { connection } from "./connection.js";
 
 export const getData = (req, res) => {
-  let sqlQuery = "SELECT * FROM houses";
+  let sqlQuery = "SELECT * FROM try";
 
   let query = connection.query(sqlQuery, (err, results) => {
     if (err) throw err;
+    console.log(results);
     res.send(results);
   });
 };
