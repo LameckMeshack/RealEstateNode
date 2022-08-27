@@ -2,7 +2,8 @@
 import cheerio from "cheerio";
 import axios from "axios";
 
-const url = "https://kenyapropertycentre.com/";
+const url =
+  "https://kenyapropertycentre.com/for-rent/flats-apartments/nairobi/showtype";
 
 const scrape = async () => {
   try {
@@ -10,12 +11,13 @@ const scrape = async () => {
     const $ = cheerio.load(result.data);
     const articles = [];
     $(".wp-block  ").each((i, element) => {
-      const title = $(element).find("h3").text();
-      const price = $(element).find("a").attr("href");
-      //   const summary = $(element).find(".wp-block-title").text();
-      articles.push({ title, price });
+      const title = $(element).find(".wp-block-title>").text();
+
+      if (title) {
+        articles.push({ title });
+      }
     }),
-      console.log(articles);
+      console.log(JSON.stringify(articles));
   } catch (error) {
     console.log(error);
   }

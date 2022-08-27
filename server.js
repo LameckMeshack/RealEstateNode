@@ -1,5 +1,7 @@
 //node js mysql connection
 import express from "express";
+//ENV variables
+// import env from "dotenv.config({ path: ".env" })";
 
 import bodyParser from "body-parser";
 import houseRouter from "./routes.js";
@@ -9,6 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const port = process.env.PORT || 3000;
+
 const hostname = "127.0.0.1";
 
 connection.connect((err) => {
